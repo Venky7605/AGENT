@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .calculator {
+            background: #1a1a2e;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .display {
+            background: #16213e;
+            color: #0fff;
+            font-size: 2.5em;
+            text-align: right;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            min-height: 60px;
+            overflow: hidden;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        button {
+            padding: 20px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+        .btn-number {
+            background: #3a3a5c;
+            color: #fff;
+        }
+        .btn-operator {
+            background: #ff9500;
+            color: #fff;
+        }
+        .btn-equal {
+            background: #00ff88;
+            color: #000;
+            grid-column: span 2;
+        }
+        .btn-clear {
+            background: #ff3b3b;
+            color: #fff;
+        }
+        .btn-zero {
+            grid-column: span 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <div class="buttons">
+            <button class="btn-clear" onclick="clearDisplay()">AC</button>
+            <button class="btn-operator" onclick="appendValue('(')">(</button>
+            <button class="btn-operator" onclick="appendValue(')')">)</button>
+            <button class="btn-operator" onclick="appendValue('/')">/</button>
+            
+            <button class="btn-number" onclick="appendValue('7')">7</button>
+            <button class="btn-number" onclick="appendValue('8')">8</button>
+            <button class="btn-number" onclick="appendValue('9')">9</button>
+            <button class="btn-operator" onclick="appendValue('*')">*</button>
+            
+            <button class="btn-number" onclick="appendValue('4')">4</button>
+            <button class="btn-number" onclick="appendValue('5')">5</button>
+            <button class="btn-number" onclick="appendValue('6')">6</button>
+            <button class="btn-operator" onclick="appendValue('-')">-</button>
+            
+            <button class="btn-number" onclick="appendValue('1')">1</button>
+            <button class="btn-number" onclick="appendValue('2')">2</button>
+            <button class="btn-number" onclick="appendValue('3')">3</button>
+            <button class="btn-operator" onclick="appendValue('+')">+</button>
+            
+            <button class="btn-number btn-zero" onclick="appendValue('0')">0</button>
+            <button class="btn-number" onclick="appendValue('.')">.</button>
+            <button class="btn-equal" onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+
+        function appendValue(value) {
+            if (display.innerText === '0' && value !== '.') {
+                display.innerText = value;
+            } else {
+                display.innerText += value;
+            }
+        }
+
+        function clearDisplay() {
+            display.innerText = '0';
+        }
+
+        function calculate() {
+            try {
+                display.innerText = eval(display.innerText);
+            } catch (e) {
+                display.innerText = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
